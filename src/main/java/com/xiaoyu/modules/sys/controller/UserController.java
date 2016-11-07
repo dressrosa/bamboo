@@ -33,6 +33,18 @@ public class UserController {
 	 * *******************↓↓↓↓↓↓↓↓↓↓↓用户基本操作接口↓↓↓↓↓↓↓↓↓↓↓***********
 	 * ******************************************************************
 	 */
+	
+	@RequestMapping("public/xiaoyu/users/login/v1")
+	public String login(HttpServletRequest request, HttpServletResponse response, String loginName,String pwd) {
+		ResponseMapper mapper = new ResponseMapper();
+		try {
+			return this.userService.login(response,loginName,pwd);
+		} catch (Exception e) {
+			mapper.setCode(ResultConstant.EXCEPTION);
+			return mapper.getResultJson();
+		}
+	}
+
 	@RequestMapping("public/xiaoyu/users/userInfo/v1")
 	public String userInfo(HttpServletRequest request, HttpServletResponse response, String userId) {
 		ResponseMapper mapper = new ResponseMapper();

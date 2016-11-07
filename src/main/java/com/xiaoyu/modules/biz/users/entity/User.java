@@ -12,13 +12,14 @@ import com.xiaoyu.common.base.BaseEntity;
 public class User extends BaseEntity {
 
 	private static final long serialVersionUID = 2636629209237547170L;
-	private String name; // 姓名
+	private String loginName; // 姓名
 	private String password; // 登录密码
-	public String getName() {
-		return name;
+	
+	public String getLoginName() {
+		return loginName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 	public String getPassword() {
 		return password;

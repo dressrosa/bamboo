@@ -14,11 +14,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * 2016年10月
  * 
  * @author xiaoyu
- * @description 暫時沒用到 改用aop
+ * @description 解决跨域和请求头的问题
  * @version 1.0
  */
 
-@Deprecated
+
 @Configuration
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 
@@ -31,6 +31,15 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 			public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 					throws Exception {
 				logger.info("进入拦截器===================");
+				
+				//允许所有地址访问
+				response.addHeader("Access-Control-Allow-Origin", "*");
+				//允许那些请求方式可以访问
+				response.addHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE");
+				//允许前端可以设置哪些请求头
+				response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,token,userId");
+				//允许前端可以接收那些响应头
+				response.addHeader("Access-Control-Expose-Headers", "token,userId");
 				return true;
 			}
 
@@ -44,7 +53,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 					Exception ex) throws Exception {
 			}
 
-		}).excludePathPatterns("/public/edencity/mall/users/login/**");
+		});//.excludePathPatterns("/public/xiaoyu/users/login/**");
 		super.addInterceptors(registry);
 	}
 

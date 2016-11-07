@@ -42,17 +42,17 @@ public class ApiHandleAop {
 			if (o instanceof HttpServletRequest)
 				request = (HttpServletRequest) o;
 		}
+//		System.out.println(request.getHeader("userId"));
+//		System.out.println(request.getHeader("token"));
 		String methodName = point.getSignature().getName();
 		if ("login".equals(methodName)) {
 			return this.getResult(point);
+			//return getCrossResult(point, request);
 		}
-
 		 userId = request.getHeader("userId");
 		 token = request.getHeader("token");
 		 ip = request.getRemoteHost();
 		 uri = request.getRequestURI();
-		// System.out.println("ip:::" + ip);
-		// System.out.println("uri:::" + request.getRequestURI());
 
 		String redis_userId = JedisUtils.get(token);
 		if (null == redis_userId) {
@@ -84,6 +84,7 @@ public class ApiHandleAop {
 			JedisUtils.hincrby(userId + ":" + ip, uri, 1);
 		}
 		return getResult(point);
+		//return getCrossResult(point, request);
 	}
 
 	private Object getResult(ProceedingJoinPoint point) {
@@ -101,7 +102,11 @@ public class ApiHandleAop {
 		logger.info("方法[" + methodName + "]执行时间为:[" + (end - start) + " milliseconds] ");
 		return result;
 	}
-	/*解决web端jsonp跨域的问题*/
+	/*解决web端jsonp跨域的问题
+	 * 但是有很大的局限性,前端不能設置headers
+	 * 所以采用拦截器,由后端解决跨域问题
+	 * 
+	 * */
 	private Object getCrossResult(ProceedingJoinPoint point,HttpServletRequest request) {
 		Object result = null;
 		long start = 0;

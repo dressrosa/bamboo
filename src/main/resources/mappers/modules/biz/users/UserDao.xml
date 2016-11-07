@@ -4,7 +4,7 @@
 
 	<sql id="userColumns">
 		a.id AS "id",
-		a.name AS "name",
+		a.login_name AS "loginName",
 		a.password as "password",
 		a.create_date AS "createDate"
 	</sql>
@@ -14,20 +14,28 @@
 	<select id="get" resultType="com.xiaoyu.modules.biz.users.entity.User">
 		SELECT
 		<include refid="userColumns" />
-		FROM t_user a
-		where
-		and a.id=#{id}
+		FROM biz_user a
+		where 1 = 1
+		<if test="loginName !=null">
+		and a.login_name = #{loginName}
+		</if>
+		<if test="id !=null">
+		and a.id=#{id}		
+		</if>
+		<if test="password !=null">
+		and a.password=#{password}
+		</if>
 	</select>
 
 
 	<insert id="insert">
-		INSERT INTO t_user
+		INSERT INTO biz_user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
 			</if>
-			<if test="name != null">
-				name,
+			<if test="loginName != null">
+				login_name,
 			</if>
 
 			<if test="password != null">
@@ -43,8 +51,8 @@
 			<if test="id != null">
 				#{id},
 			</if>
-			<if test="name != null">
-				#{name},
+			<if test="loginName != null">
+				#{;oginName},
 			</if>
 
 			<if test="password != null">
@@ -60,7 +68,7 @@
 
 
 	<update id="update">
-		UPDATE t_user
+		UPDATE biz_user
 		<set>
 			<if test="name != null">
 				name = #{name},
