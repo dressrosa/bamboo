@@ -5,11 +5,10 @@
 	<sql id="userColumns">
 		a.id AS "id",
 		a.login_name AS "loginName",
-		a.password as "password",
+		a.password as
+		"password",
 		a.create_date AS "createDate"
 	</sql>
-
-
 
 	<select id="get" resultType="com.xiaoyu.modules.biz.users.entity.User">
 		SELECT
@@ -17,13 +16,13 @@
 		FROM biz_user a
 		where 1 = 1
 		<if test="loginName !=null">
-		and a.login_name = #{loginName}
+			and a.login_name = #{loginName}
 		</if>
 		<if test="id !=null">
-		and a.id=#{id}		
+			and a.id=#{id}
 		</if>
 		<if test="password !=null">
-		and a.password=#{password}
+			and a.password=#{password}
 		</if>
 	</select>
 
@@ -52,7 +51,7 @@
 				#{id},
 			</if>
 			<if test="loginName != null">
-				#{;oginName},
+				#{loginName},
 			</if>
 
 			<if test="password != null">

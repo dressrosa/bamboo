@@ -11,22 +11,26 @@ import com.xiaoyu.common.base.BaseEntity;
  */
 public class User extends BaseEntity {
 
-	private static final long serialVersionUID = 2636629209237547170L;
+	private static final long serialVersionUID = 1L;
 	private String loginName; // 姓名
 	private String password; // 登录密码
-	
+
 	public String getLoginName() {
 		return loginName;
 	}
-	public void setLoginName(String loginName) {
+
+	public User setLoginName(String loginName) {
 		this.loginName = loginName;
+		return this;
 	}
+
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
+
+	public User setPassword(String password) {
 		this.password = password;
+		return this;
 	}
-	
-	
+
 }
