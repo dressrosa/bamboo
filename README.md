@@ -163,6 +163,17 @@ UserDao.xml:
 ```
 其中namespace填写dao层的全路径,resultType写返回的类型,一般返回entity就行了,也可以返回map等,具体可以去学习mybatis的用法
 
+**部署**:
+- 打包:eclipse里面右键run as : maven build :命令是package,打包默认存放在项目底下的target里面
+- 运行:linux下 
+    nohup java -jar xxx.jar &
+运行后,会默认在当前文件夹下生成nohup.out文件,用于存储日志
+
+- 打印日志:
+    tail -f nohup.out
+
+**请求**:
+http://host:port/xxx/xx 格式就行了
 
 **遇见的问题**:
 
@@ -214,6 +225,7 @@ only the resultType is the full path can map the entity
         </if>
     </select>
 ```
+
 
 
 
