@@ -38,7 +38,7 @@ public class UserService extends BaseService<UserDao, User> {
 		u.setId(userId);
 		User user = this.get(u);
 
-		mapper.setDatas(this.user2Map(user));
+		mapper.setData(this.user2Map(user));
 		return mapper.getResultJson();
 	}
 
@@ -52,7 +52,7 @@ public class UserService extends BaseService<UserDao, User> {
 			String token = IdGenerator.uuid();
 			JedisUtils.set(token, user.getId(), 6 * 60 * 60);
 			response.addHeader("token", token);
-			mapper.setDatas(this.user2Map(user));
+			mapper.setData(this.user2Map(user));
 		}
 		return mapper.getResultJson();
 	}
