@@ -263,42 +263,5 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     	result.append(val.substring(1));
     	return result.toString();
     }
-    
-    
-    /**
-	 * 驼峰命名法工具
-	 * 改造 如biz_order 去掉不要biz
-	 * @author hongyu
-	 */
-    public static String toCamelCaseForKSFC(String s) {
-        if (s == null) {
-            return null;
-        }
-        s = s.toLowerCase();
-        s = s.substring(s.indexOf(SEPARATOR)+1, s.length());//截取第一个分隔符后面的
-        StringBuilder sb = new StringBuilder(s.length());
-        boolean upperCase = false;
-        
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            
-            if (c == SEPARATOR) {//第一个"_"不要截取
-                upperCase = true;
-            } else if (upperCase) {
-                sb.append(Character.toUpperCase(c));
-                upperCase = false;
-            } else {
-                sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
-    
-    public static String toCapitalizeCamelCaseForKSFC(String s) {
-        if (s == null) {
-            return null;
-        }
-        s = toCamelCaseForKSFC(s);
-        return s.substring(0, 1).toUpperCase() + s.substring(1);
-    }
+     
 }
