@@ -37,6 +37,14 @@ public class BaseEntity implements Serializable {
 	 */
 	private int delFlag;
 
+	public BaseEntity() {
+
+	}
+
+	public BaseEntity(String id) {
+		this.id = id;
+	}
+
 	public String getId() {
 		return id;
 	}
